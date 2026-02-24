@@ -21,3 +21,16 @@ npm install
 npm run dev
 npm run deploy
 ```
+
+### ✅ CSV Data Quality Check
+
+Run this script to validate the live Google Sheet CSV (same source used by the app) for:
+
+- missing school names
+- missing links
+- missing/invalid year ranges (`Type`)
+- year gaps or overlaps within the same school
+
+```bash
+npm run check:csv
+```

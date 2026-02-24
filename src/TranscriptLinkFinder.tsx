@@ -34,7 +34,7 @@ export default function TranscriptLinkFinder() {
 
   useEffect(() => {
     fetch(
-      `https://docs.google.com/spreadsheets/d/e/2PACX-1vQTZ5SnVlSKEzmdrP89pURZJJsm_s3y3vjr8cy3t-eR12UxiZt5pkiz8QCEoYc6mWZJtoXkyJs-vXqN/pub?output=csv`
+      `https://docs.google.com/spreadsheets/d/e/2PACX-1vQTZ5SnVlSKEzmdrP89pURZJJsm_s3y3vjr8cy3t-eR12UxiZt5pkiz8QCEoYc6mWZJtoXkyJs-vXqN/pub?output=csv`,
     )
       .then((res) => res.text())
       .then((csvText) => {
@@ -50,16 +50,17 @@ export default function TranscriptLinkFinder() {
           new Set([
             ...rows.map((r: SchoolRow) => r["School Name"]),
             ...Object.keys(SCHOOL_NAME_ALIASES), // ← Add old names too
-          ])
+          ]),
         ).sort();
         setSchoolOptions(schools);
 
         const currentYear = new Date().getFullYear();
         const fullYearRange = Array.from(
           { length: currentYear - 1900 + 1 },
-          (_, i) => (1900 + i).toString()
+          (_, i) => (currentYear - i).toString(),
         );
         setYearOptions(fullYearRange);
+        setSelectedYear(currentYear.toString());
       });
   }, []);
 
